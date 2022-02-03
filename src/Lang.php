@@ -21,8 +21,8 @@ class Lang implements \VekaServer\Interfaces\LangInterface
                 INNER JOIN traduction__key TK ON TK.id_traduction_key = TV.id_traduction_key
                 WHERE LOWER(TK.uniq_key) = :uniq_key AND LOWER(TL.lang) = :lang ';
         $rs = $this->bdd->exec($sql, [
-            's-uniq_key' => strtolower($key)
-            ,'s-lang' => strtolower($this->lang)
+            's-uniq_key' => mb_strtolower($key)
+            ,'s-lang' => mb_strtolower($this->lang)
         ]);
 
         if(empty($rs)) {
@@ -40,8 +40,8 @@ class Lang implements \VekaServer\Interfaces\LangInterface
                 INNER JOIN traduction__key TK ON TK.id_traduction_key = TV.id_traduction_key
                 WHERE LOWER(TK.uniq_key) = :uniq_key AND LOWER(TL.lang) = :lang ';
         $rs = $this->bdd->exec($sql, [
-            's-uniq_key' => strtolower($key)
-            ,'s-lang' => strtolower($this->lang)
+            's-uniq_key' => mb_strtolower($key)
+            ,'s-lang' => mb_strtolower($this->lang)
         ]);
 
         return !empty($rs);
@@ -49,13 +49,13 @@ class Lang implements \VekaServer\Interfaces\LangInterface
 
     public function set($key, $lang, $traduction){
         $sql = 'INSERT INTO traduction__key (uniq_key) VALUES (:uniq_key) ON DUPLICATE KEY UPDATE id_traduction_key = id_traduction_key';
-        $this->bdd->exec($sql, ['s-uniq_key' => $key]);
+        $this->bdd->exec($sql, ['s-uniq_key' => mb_strtolower($key)]);
 
         $sql = 'SELECT id_traduction_lang , id_traduction_key
                 FROM traduction__lang 
                 INNER JOIN traduction__key TK ON TK.uniq_key = :uniq_key
                 WHERE lang = :lang';
-        $rs = $this->bdd->exec($sql, [ 's-lang' => strtolower($lang) , 's-uniq_key' => strtolower($key)]);
+        $rs = $this->bdd->exec($sql, [ 's-lang' => mb_strtolower($lang) , 's-uniq_key' => mb_strtolower($key)]);
         $id_traduction_lang = $rs[0]['id_traduction_lang'];
         $id_traduction_key = $rs[0]['id_traduction_key'];
 
@@ -64,13 +64,13 @@ class Lang implements \VekaServer\Interfaces\LangInterface
         $this->bdd->exec($sql, [
             'i-id_traduction_key' => $id_traduction_key
             ,'i-id_traduction_lang' => $id_traduction_lang
-            ,'s-trad' => strtolower($traduction)
+            ,'s-trad' => mb_strtolower($traduction)
         ]);
     }
 
     public function addLang($lang){
         $sql = 'INSERT INTO traduction__lang (lang) VALUES (:lang) ON DUPLICATE KEY UPDATE id_traduction_lang = id_traduction_lang';
-        $this->bdd->exec($sql, ['s-lang' => strtolower($lang)]);
+        $this->bdd->exec($sql, ['s-lang' => mb_strtolower($lang)]);
     }
 
     /**
