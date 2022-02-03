@@ -1,0 +1,20 @@
+{
+    "name": "veka-server/lang",
+    "description": "php class for traduction with BDD",
+    "license": "MIT",
+    "keywords": ["minimalist","traduction", "lang", "mysql"],
+    "authors": [
+        {
+            "name": "Vanhaezebrouck Nicolas",
+            "email": "contact@veka-server.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "VekaServer\\Lang\\" : "src/"
+        }
+    },
+    "require": {
+        "veka-server/interfaces": "^0.2"
+    }
+}
