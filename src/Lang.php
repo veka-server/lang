@@ -1,6 +1,6 @@
 <?php
 
-namespace VekaServer\Discord;
+namespace VekaServer\Lang;
 
 class Lang implements \VekaServer\Interfaces\LangInterface
 {
