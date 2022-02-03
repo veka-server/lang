@@ -55,7 +55,7 @@ class Lang implements \VekaServer\Interfaces\LangInterface
                 FROM traduction__lang 
                 INNER JOIN traduction__key TK ON TK.uniq_key = :uniq_key
                 WHERE lang = :lang';
-        $rs = $this->bdd->exec($sql, [ 's-lang' => $lang , 's-uniq_key' => strtolower($key)]);
+        $rs = $this->bdd->exec($sql, [ 's-lang' => strtolower($lang) , 's-uniq_key' => strtolower($key)]);
         $id_traduction_lang = $rs[0]['id_traduction_lang'];
         $id_traduction_key = $rs[0]['id_traduction_key'];
 
