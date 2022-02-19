@@ -15,6 +15,10 @@ class Lang implements \VekaServer\Interfaces\LangInterface
 
     public function get($key){
 
+        if(empty($key)) {
+            return '';
+        }
+        
         $sql = 'SELECT TV.trad 
                 FROM traduction__value TV
                 INNER JOIN traduction__lang TL ON TL.id_traduction_lang = TV.id_traduction_lang
